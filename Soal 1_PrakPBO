@@ -1,0 +1,55 @@
+import math
+
+# Definisi kelas Calculator
+class Calculator:
+    def __init__(self, value):
+        # Konstruktor untuk menyimpan nilai
+        self.value = value
+
+    def __add__(self, other):
+        # Operator penjumlahan
+        return Calculator(self.value + other.value)
+
+    def __sub__(self, other):
+        # Operator pengurangan
+        return Calculator(self.value - other.value)
+
+    def __mul__(self, other):
+        # Operator perkalian
+        return Calculator(self.value * other.value)
+
+    def __truediv__(self, other):
+        # Operator pembagian, menangani pembagian oleh nol
+        if other.value == 0:
+            raise ValueError("Cannot divide by zero")
+        return Calculator(self.value / other.value)
+
+    def __pow__(self, other):
+        # Operator eksponen
+        return Calculator(self.value ** other.value)
+    
+    def log(self):
+        # Metode untuk menghitung logaritma natural (ln)
+        if self.value <= 0:
+            raise ValueError("Logarithm undefined for non-positive values")
+        return Calculator(math.log(self.value))
+    
+    def __repr__(self):
+        # Metode representasi string dari objek Calculator
+        return f"Calculator({self.value})"
+
+# Mengambil input dari pengguna
+val1 = float(input("Masukkan angka pertama: "))  # Meminta pengguna memasukkan angka pertama
+val2 = float(input("Masukkan angka kedua: "))  # Meminta pengguna memasukkan angka kedua
+
+# Membuat objek Calculator berdasarkan input
+num1 = Calculator(val1)
+num2 = Calculator(val2)
+
+# Menampilkan hasil operasi
+print("Hasil Penjumlahan:", num1 + num2)  # Menampilkan hasil penjumlahan
+print("Hasil Pengurangan:", num1 - num2)  # Menampilkan hasil pengurangan
+print("Hasil Perkalian:", num1 * num2)  # Menampilkan hasil perkalian
+print("Hasil Pembagian:", num1 / num2)  # Menampilkan hasil pembagian
+print("Hasil Eksponen:", num1 ** num2)  # Menampilkan hasil eksponen
+print("Logaritma angka pertama:", num1.log())  # Menampilkan logaritma angka pertama
